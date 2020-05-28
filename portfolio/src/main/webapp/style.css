@@ -5,12 +5,26 @@
 html {
     font-family: "Montserrat", sans-serif;
     height: 100%;
+    line-height: 1.5;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
+body {
+    margin: 0px;
+}
+
+/*Start Navbar CSS*/
 .navbar {
+    margin: 0px;
+    padding: 0px;
     background-color: #b7c8f8;
     overflow: hidden;
     width: 100%;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    position: fixed;
+    top: 0px;
 }
 
 .navbar a {
@@ -18,35 +32,112 @@ html {
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 10px;
+    padding: 10px 15px;
     text-decoration: none;
+    font-size: 1.2rem;
 }
 
 .navbar a:hover {
     background-color: #84a3f8;
-    border-radius: 5px;
+    color: #ffffff;
 }
 
 .navbar a.active {
+    background-color: #84a3f8;
     color: #ffffff;
 }
 
 .sticky {
     position: fixed;
-    top: 0;
+    top: 0px;
     width: 100%;
 }
 
-.sticky + #content {
+.sticky + .home {
     padding-top: 50px;
 }
+/*End Navbar CSS*/
 
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+/*Start Home CSS*/
+.home {
+    margin: 0px;
+    padding: 50px;
+    min-height: 100vh;
+    width: 100%;
+    text-align: center;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.home-bg-img {
+    background-position: center;
+    background-size: cover;
+    background-image: url("images/purplebrick.jpg");
+    height: 100%;
+    min-height: 100vh;
+    opacity: 0.9;
 }
+
+.home .name {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.home .subtitle {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.home .description {
+    font-size: 1.5rem;
+    font-weight: 200;
+    padding-top: 20px;
+    color: #ffffff;
+}
+
+.home .resumedownload {
+    padding: 10px;
+    background-color: transparent;
+    border: 3px solid #84a3f8;
+    border-radius: 20px;
+    color: #f2f2f2;
+    font-size: 1.2rem;
+    font-weight: 100;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-decoration: none;
+}
+
+.resumedownload:hover {
+    background-color: #84a3f8;
+    color: #ffffff;
+}
+/*End Home CSS*/
+
+/*Start About Me CSS*/
+.about {
+    margin: 0px;
+    padding: 50px;
+    width: 100%;
+    height: auto; 
+    text-align: center;
+}
+
+.about .about-title {
+    margin: 0px;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #84a3f8;
+}
+
+.about .about-me {
+    margin: 0px;
+    font-size: 1.2rem;
+    font-weight: 100;
+    color: #84a3f8;
+}
+/*End About Me CSS*/
+
