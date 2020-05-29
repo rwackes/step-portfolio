@@ -143,6 +143,12 @@ body {
     align-content: center;
 }
 
+.grid-item {
+    background-color: #ffffff;
+    border: 3px solid #84a3f8;
+    border-radius: 30px;
+}
+
 #projects .project-title {
     margin: 0px;
     padding: 0px;
