@@ -147,6 +147,7 @@ body {
     background-color: #ffffff;
     border: 3px solid #84a3f8;
     border-radius: 30px;
+    padding: 10px;
 }
 
 #projects .project-title {
@@ -160,6 +161,7 @@ body {
 #projects .project-description {
     margin: 0px;
     padding: 0px;
+    padding-bottom: 20px;
     font-size: 1.2rem;
     font-weight: 100;
     color: #000000;
