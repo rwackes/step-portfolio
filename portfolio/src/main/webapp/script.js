@@ -29,6 +29,7 @@ function addRandomGreeting() {
 
 /**
  * Creates a sticky navbar as user scrolls webpage.
+ * Removed navbar for the time being. Kept JS for future implementation of navbar. 
  */
  window.onscroll = function() {
      positionNavbar()
