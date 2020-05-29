@@ -6,45 +6,69 @@
     <title>Rhiannan Wackes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
   </head>
   <body>
-    <!-- Top Navbar-->
-    <div class="navbar">
-        <a class="active" href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </div>
-
-    <!-- Header -->
-    <header class="home home-bg-img" >
+    <!-- Home -->
+    <div class="home-bg-img" id="home">
         <h1 class="name">Rhiannan Wackes</h1>
-        <p class="subtitle">Student & Programmer</p>
+        <h3 class="subtitle">Student & Programmer</h3>
         <p class="description">I am a full-stack developer focused on designing and 
             building applications. I am a rising third-year Computer Science student at the Georgia
             Institute of Technology concentrating in Intelligence and People.
         </p>
-        <a class="resumedownload" href="#resume" type="button">Download Resume</a>
-    </header>
-
+        <a class="resumedownload" href="#resume" type="button" target="_blank" src="/assets/resume.pdf">Download Resume</a>
+    </div>
     <!-- About Me -->
-    <div class="about">
+    <div id="about">
         <h3 class="about-title">About Me</h3>
         <p class="about-me">Hello! I'm Rhiannan, a third year Computer Science major at the Georgia Institute
             of Technology. I am pursuing a concentration in Artificial Intelligence and People. I have 
             mostly back-end development experience, but will be working with front-end and back-end this year
             to become a well-rounded full-stack developer. This is my first time building a website from 
-            scratch and I know I have a lot to learn, and I look forward to learning!<br>I would describe myself
+            scratch and I know I have a lot to learn, and I look forward to learning!<br>I would describe myself 
             as a intellectually curious and always seeking new heights. I enjoy creating and contributing to 
             things and solving problems. I love painting and playing video games. It is a dream of mine to be 
             able to construct my own PC this year to be able to enjoy video games some more.
         </p>
+        <img class="profile-img" src="/images/Profile.jpeg" alt="Picture of Rhiannan Wackes.">
     </div>
-
     <!-- Projects -->
-    <div class="projects">
-
+    <div id="projects">
+        <h3 class="projects-title">Projects</h3>
+        <p class="projects-subtitle">Check out some of my recent work.</p>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h5 class="project-title">STEP Portfolio Website</h5>
+                <p class="project-description">A portfolio website that depicts my background, my recent work, 
+                    and my newly learned web development skills. 
+                </p>
+                <a class="github-link" href="https://www.github.com/rwackes/step-portfolio" type="button" target="_blank">View on Github</a>
+            </div>
+            <div class="grid-item">
+                <h5 class="project-title">Converge's Social Media Mistake Eraser</h5>
+                <p class="project-description">A website for a paid subscription service that monitors high-profile 
+                    Twitter accounts for likely inappropriate or offensive tweets that may lead to the user being 
+                    "cancelled" or creating an unsafe space.<br>Not yet implemented.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Contact -->
+    <div id="contact">
+        <h3 class="contact-title">Contact Me</h3>
+        <div class="social-icons">
+            <a class="button" href="https://github.com/rwackes" target="_blank">
+                <i class="fa fa-github"></i>
+            </a>
+            <a class="button" href="https://www.linkedin.com/in/rhiannanwackes" target="_blank">
+                <i class="fa fa-linkedin"></i>
+            </a>
+            <a class="button" href="mailto:wackesrhiannan@gmail.com" target="_blank">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </div>
     </div>
   </body>
 </html>
