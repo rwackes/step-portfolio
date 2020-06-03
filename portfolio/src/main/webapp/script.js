@@ -13,33 +13,38 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Fetches a form submission/comment from the server and adds it to DOM
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function getFormResponse() {
+  console.log('Fetching responses to form.');
+  const responsePromise = fetch('/data');
+  responsePromise.then(handleResponse);
 }
 
 /**
- * Creates a sticky navbar as user scrolls webpage.
- * Removed navbar for the time being. Kept JS for future implementation of navbar. 
+ * Handles response by converting it to text and passing the result to
+ * addQuoteToDom().
  */
- window.onscroll = function() {
-     positionNavbar()
- };
- var navbar = document.getElementById("navbar");
- var sticky = navbar.offsetTop;
- function positionNavbar() {
-     if (window.pageYOffset >= sticky) {
-         navbar.classList.add("sticky");
-     } else {
-         navbar.classList.remove("sticky");
-     }
- }
+function handleResponse(response) {
+  console.log('Handling the response.');
+  const textPromise = response.text();
+  textPromise.then(addResponseToDom);
+}
+
+/** Adds form submission/comment to the DOM. */
+function addResponseToDom(message) {
+  console.log('Adding message to dom: ' + message);
+  const messageContainer = document.getElementById('message-container');
+  var messageObj = JSON.parse(message);
+  messageObj.history.forEach((comment) => {
+      messageContainer.appendChild(createListElement(comment));
+  });
+}
+
+/** Creates an <li> element containing form submission/comment. */
+function createListElement(comment) {
+  const messageContainer = document.createElement('li');
+  messageContainer.innerText = comment;
+  return messageContainer;
+}
+

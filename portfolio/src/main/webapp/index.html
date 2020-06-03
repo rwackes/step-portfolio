@@ -10,14 +10,21 @@
     <script src="script.js"></script>
   </head>
   <body>
+    <!-- Top Navbar -->
+    <div id="topnav">
+      <div class="links-center">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="comments.html">Comments</a>
+      </div>
+    </div>
     <!-- Home -->
-    <div class="home-bg-img" id="home">
+    <div id="home-bg-img"></div>
+    <div id="home">
       <h1 class="name">Rhiannan Wackes</h1>
       <h3 class="subtitle">Student & Programmer</h3>
-      <p class="description">I am a full-stack developer focused on designing and building applications. 
-          I am a rising third-year Computer Science student at the Georgia Institute of Technology 
-          concentrating in Intelligence and People.
-      </p>
+      <p class="description">I am a full-stack developer focused on designing and building applications.</p>
       <a class="resumedownload" href="/assets/Wackes_Rhiannan.pdf" type="button" target="_blank">Download Resume</a>
     </div>
     <!-- About Me -->
@@ -27,10 +34,15 @@
           of Technology. I am pursuing a concentration in Artificial Intelligence and People. I have 
           mostly back-end development experience, but will be working with front-end and back-end this year
           to become a well-rounded full-stack developer. This is my first time building a website from 
-          scratch and I know I have a lot to learn, and I look forward to learning!<br>I would describe myself 
-          as a intellectually curious and always seeking new heights. I enjoy creating and contributing to 
-          things and solving problems. I love painting and playing video games. It is a dream of mine to be 
-          able to construct my own PC this year to be able to enjoy video games some more.
+          scratch and I know I have a lot to learn, but I look forward to learning!<br>I was first introduced
+          to computer science in high school when I took Intro to Programming and AP Computer Science my final 
+          years, where I found an interest in computer programming. Throughout my college experience, I have 
+          become increasingly more passionate about touching the lives of others through software.<br>
+          I would describe myself as intellectually curious and always seeking new heights. I enjoy 
+          creating and contributing to things and solving problems. I was born in Puerto Rico and lived there 
+          for thirteen years until I moved to Maryland, where I currently reside. Some of my hobbies include 
+          painting, listening to music, and playing video games. It is a dream of mine to be able to build my 
+          own PC gaming system by the end of this year to be able to enjoy playing video games some more.<br>
       </p>
       <img class="profile-img" src="/images/Profile.jpeg" alt="Picture of Rhiannan Wackes.">
     </div>
@@ -70,5 +82,13 @@
         </a>
       </div>
     </div>
+    <!-- JS Comment Form from the walkthrough 
+    <div id="comments">
+      <h1>Random Greeting</h1>
+      <p>Click here to see a random greeting:</p>
+      <button onclick="getRandomMessage()">Fetch a greeting!</button>
+      <div id="message-container"></div>
+    </div>
+    -->
   </body>
 </html>
