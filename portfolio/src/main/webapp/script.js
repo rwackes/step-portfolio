@@ -32,19 +32,42 @@ function handleResponse(response) {
 }
 
 /** Adds form submission/comment to the DOM. */
-function addResponseToDom(message) {
-  console.log('Adding message to dom: ' + message);
-  const messageContainer = document.getElementById('message-container');
-  var messageObj = JSON.parse(message);
-  messageObj.history.forEach((comment) => {
-      messageContainer.appendChild(createListElement(comment));
+function addResponseToDom(comments) {
+  console.log('Adding message to dom: ' + comments);
+  const commentsElement = document.getElementById('comments-container');
+  var commentsObj = JSON.parse(comments);
+  commentsObj.forEach((comment) => {
+      commentsElement.appendChild(createCommentElement(comment));
   });
 }
 
 /** Creates an <li> element containing form submission/comment. */
-function createListElement(comment) {
-  const messageContainer = document.createElement('li');
-  messageContainer.innerText = comment;
-  return messageContainer;
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const titleElement = document.createElement('span');
+  titleElement.innerText = 'Comment Posted By: ' + comment.fname + ' ' + comment.lname;
+  const messageElement = document.createElement('span');
+  messageElement.innerText = comment.message;
+
+  /** const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete Comment';
+  deleteButtonElement.addEventListener('click', () => {
+      deleteComment(comment);
+      commentElement.remove();
+  });
+  */
+  commentElement.appendChild(titleElement);
+  commentElement.appendChild(messageElement);
+  //commentElement.appendChild(deleteButtonElement);
+  return commentElement;
 }
 
+/** Tells the server to delete the comment.
+function deleteComment(comment) {
+    const params = new URLSearchParams();
+    params.append('id', comment.id);
+    fetch('/delete-comment', {method: 'POST', body:params});
+}
+*/

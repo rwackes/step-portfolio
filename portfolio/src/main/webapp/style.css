@@ -21,7 +21,7 @@ body {
     overflow: hidden;
     text-align: center;
     padding: 10px;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, .1);
     z-index: 10;
     position: fixed;
     width: 100%;
@@ -47,7 +47,6 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    padding-bottom: 10px;
 }
 
 /*End Navbar CSS*/
@@ -100,7 +99,7 @@ body {
     color: #f2f2f2;
     font-size: 20px;
     font-weight: 200;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
     text-align: center;
     text-decoration: none;
 }
@@ -214,7 +213,7 @@ body {
     color: #000000;
     font-size: 20px;
     font-weight: 100;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -307,7 +306,7 @@ input[type=submit] {
   border-radius: 20px;
   font-size: 15px;
   font-weight: 100;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -328,10 +327,14 @@ input[type=submit]:hover {
     text-align: center;
 }
 
-#message-container li {
+.comment {
+    list-style-type: none;
     margin: 0px 0px 10px 0px;
     padding: 10px;
     border: 3px solid #84a3f8;
     background-color: #ececec;
+    display: block;
+    font-size: 15px;
+    font-weight: 100;
 }
 /*End Comments Form CSS*/
