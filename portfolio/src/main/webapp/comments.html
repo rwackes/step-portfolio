@@ -21,7 +21,7 @@
     </div>
     <!-- Contact/Comments Form -->
     <div id="comments">
-      <h3 class="comments-title">Leave Me A Comment</h3>
+      <h3 class="comments-title">Leave A Comment</h3>
       <form action="/data" method="POST">
         <label for="fname">First Name</label>
         <input type="text" id="fname" name="firstname" placeholder="Enter your first name...">
@@ -42,6 +42,12 @@
       </form>
       
       <h5 class="previous-comments-title">Previous Comments</h5>
+      <!--
+      <form action="/data" method="GET">
+        <input type="number" id="count" name="count" min="0" max="30">
+        <input type="submit" value="Load"/>
+      </form>
+      -->
       <div id="comments-container"></div>
     </div>
   </body>

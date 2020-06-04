@@ -17,8 +17,6 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -41,8 +39,22 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("FormSubmissions").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+
+    /**
+    int commentCount = getCommentCount(request);
+    if (commentCount == -1) {
+        response.setContentType("text/html");
+        response.getWriter().println("Please enter an integer for the number of comments you wish to be loaded.");
+    }
+    */
+
     List<FormSubmissions> comments = new ArrayList<>();
     for (Entity entity: results.asIterable()) {
+      /**  
+      if (commentCount == 0) {
+          return;
+      }  
+      */
       long id = entity.getKey().getId();
       String fname = (String) entity.getProperty("fname");
       String lname = (String) entity.getProperty("lname");
@@ -52,6 +64,7 @@ public class DataServlet extends HttpServlet {
       String message = (String) entity.getProperty("message");
       FormSubmissions comment = new FormSubmissions(id, fname, lname, email, number, timestamp, message);
       comments.add(comment);
+      //commentCount -= 1;
     }
     response.setContentType("application/json");
     String commentsJSON = convertToJsonUsingGson(comments);
@@ -63,6 +76,24 @@ public class DataServlet extends HttpServlet {
     String json = gson.toJson(comments);
     return json;
   }
+  
+  /**
+  private int getCommentCount(HttpServletRequest request) {
+    int commentCount;
+    String commentLimit = request.getParameter("count");
+    try {
+      commentCount = Integer.parseInt(commentLimit);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + commentLimit);
+      return -1;
+    }
+    if (commentCount < 0) {
+      System.err.println("Comment limit is out of range: " + commentLimit);
+      return -1;
+    }
+    return commentCount;
+  }
+  */
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -70,13 +101,13 @@ public class DataServlet extends HttpServlet {
     String fname = getParameter(request, "firstname", "");
     // Get the last name input from the form.
     String lname = getParameter(request, "lastname", "");
-    //Get the email address input from the form.
+    // Get the email address input from the form.
     String email = getParameter(request, "emailaddress", "");
-    //Get the contact number input from the form.
+    // Get the contact number input from the form.
     String number = getParameter(request, "phonenumber", "");
-    //Get timestamp of when form was submitted.
+    // Get timestamp of when form was submitted.
     long timestamp = System.currentTimeMillis();
-    //Get the message input from the form.
+    // Get the message input from the form.
     String message = getParameter(request, "message", "");
 
     Entity formSubmissionEntity = new Entity("FormSubmissions");
@@ -106,19 +137,3 @@ public class DataServlet extends HttpServlet {
     return value;
   }
 }
-
-
-/** Servlet responsible for deleting form submission/comments.
-@WebServlet("/delete-comment")
-public class DeleteCommentServlet extends HttpServlet {
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    long id = Long.parseLong(request.getParameter("id"));
-    Key formSubmissionEntityKey = KeyFactory.createKey("FormSubmissions", id);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.delete(formSubmissionEntityKey);
-  }
-}
-*/
-

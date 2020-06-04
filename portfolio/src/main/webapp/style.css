@@ -1,290 +1,289 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Montserrat', sans-serif;
-    height: 100%;
-    line-height: 1.5;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+  font-family: 'Montserrat', sans-serif;
+  height: 100%;
+  line-height: 1.5;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-    margin: 0px;
-    height: 100%;
+  margin: 0px;
+  height: 100%;
 }
 
 /*Start Navbar CSS*/
 #topnav {
-    background: #b7c8f8;
-    overflow: hidden;
-    text-align: center;
-    padding: 10px;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, .1);
-    z-index: 10;
-    position: fixed;
-    width: 100%;
+  background: #b7c8f8;
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, .1);
+  z-index: 10;
+  position: fixed;
+  width: 100%;
 }
 
 #topnav a {
-    padding: 10px;
-    color: #ffffff;
-    font-size: 20px;
-    text-align: center;
-    text-decoration: none;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
 }
 
 #topnav a:hover {
-    color: #84a3f8;
+  color: #84a3f8;
 }
 
 #topnav a:active {
-    color: #84a3f8;
+  color: #84a3f8;
 }
 
 .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
-
 /*End Navbar CSS*/
 
 /*Start Home CSS*/
 #home {
-    color: #ffffff;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  color: #ffffff;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #home-bg-img {
-    background-image: url(images/purplebrick.jpg);
-    background-position: center;
-    background-size: cover;
-    height: 100%;
-    opacity: .7;
+  background-image: url(images/purplebrick.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  opacity: .7;
 }
 
 #home .name {
-    padding: 0px;
-    font-size: 70px;
-    font-weight: 800;
-    color: #ffffff;
+  padding: 0px;
+  font-size: 70px;
+  font-weight: 800;
+  color: #ffffff;
 }
 
 #home .subtitle {
-    padding: 0px;
-    font-size: 40px;
-    font-weight: 400;
-    color: #ffffff;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 #home .description {
-    padding: 0px;
-    font-size: 25px;
-    font-weight: 250;
-    color: #ffffff;
+  padding: 0px;
+  font-size: 25px;
+  font-weight: 250;
+  color: #ffffff;
 }
 
 #home .resumedownload {
-    padding: 10px;
-    background-color: transparent;
-    border: 3px solid #84a3f8;
-    border-radius: 20px;
-    color: #f2f2f2;
-    font-size: 20px;
-    font-weight: 200;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
-    text-align: center;
-    text-decoration: none;
+  padding: 10px;
+  background-color: transparent;
+  border: 3px solid #84a3f8;
+  border-radius: 20px;
+  color: #f2f2f2;
+  font-size: 20px;
+  font-weight: 200;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
+  text-align: center;
+  text-decoration: none;
 }
 
 #home .resumedownload:hover {
-    background-color: #84a3f8;
-    color: #ffffff;
+  background-color: #84a3f8;
+  color: #ffffff;
 }
 /*End Home CSS*/
 
 /*Start About Me CSS*/
 #about {
-    margin: 0px;
-    padding: 50px;
-    width: 100%;
-    height: auto; 
-    text-align: center;
-    background-color: #ffffff;
+  margin: 0px;
+  padding: 50px;
+  width: 100%;
+  height: auto; 
+  text-align: center;
+  background-color: #ffffff;
 }
 
 #about .about-title {
-    margin: 0px;
-    padding: 0px;
-    font-size: 40px;
-    font-weight: 400;
-    color: #84a3f8;
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #84a3f8;
 }
 
 #about .about-me {
-    margin: 0px;
-    padding: 0px;
-    font-size: 20px;
-    font-weight: 100;
-    color: #000000;
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  font-weight: 100;
+  color: #000000;
 }
 
 .profile-img {
-    background-position: center;
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    padding-top: 10px;
+  background-position: center;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 /*End About Me CSS*/
 
 /*Start Projects CSS*/
 #projects {
-    margin: 0px;
-    padding: 50px;
-    width: 100%;
-    height: auto; 
-    text-align: center;
-    background-color: #ececec;
+  margin: 0px;
+  padding: 50px;
+  width: 100%;
+  height: auto; 
+  text-align: center;
+  background-color: #ececec;
 }
 
 #projects .projects-title{
-    margin: 0px;
-    padding: 0px;
-    font-size: 40px;
-    font-weight: 400;
-    color: #84a3f8;
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #84a3f8;
 }
 
 #projects .projects-subtitle {
-    margin: 0px;
-    padding: 0px;
-    font-size: 20px;
-    font-weight: 200;
-    color: #000000;
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #000000;
 }
 
 .grid-container {
-    padding-top: 20px;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 100px 50px;
-    justify-content: center;
-    align-content: center;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 100px 50px;
+  justify-content: center;
+  align-content: center;
 }
 
 .grid-item {
-    background-color: #ffffff;
-    border: 3px solid #84a3f8;
-    border-radius: 30px;
-    padding: 10px;
+  background-color: #ffffff;
+  border: 3px solid #84a3f8;
+  border-radius: 30px;
+  padding: 10px;
 }
 
 #projects .project-title {
-    margin: 0px;
-    padding: 0px;
-    font-size: 30px;
-    font-weight: 300;
-    color: #84a3f8;
+  margin: 0px;
+  padding: 0px;
+  font-size: 30px;
+  font-weight: 300;
+  color: #84a3f8;
 }
 
 #projects .project-description {
-    margin: 0px;
-    padding: 0px;
-    padding-bottom: 20px;
-    font-size: 20px;
-    font-weight: 100;
-    color: #000000;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: 100;
+  color: #000000;
 }
 
 #projects .github-link {
-    margin: 0px;
-    padding: 5px 10px;
-    background-color: transparent;
-    border: 1.5px solid #84a3f8;
-    border-radius: 20px;
-    color: #000000;
-    font-size: 20px;
-    font-weight: 100;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  margin: 0px;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 1.5px solid #84a3f8;
+  border-radius: 20px;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 100;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
 }
 
 #projects .github-link:hover {
-    background-color: #84a3f8;
-    color: #ffffff;
+  background-color: #84a3f8;
+  color: #ffffff;
 }
 /*End Projects CSS*/
 
 /*Start Contact CSS*/
 #contact {
-    margin: 0px;
-    padding: 50px;
-    width: 100%;
-    height: auto; 
-    text-align: center;
-    background-color: #b7c8f8;
+  margin: 0px;
+  padding: 50px;
+  width: 100%;
+  height: auto; 
+  text-align: center;
+  background-color: #b7c8f8;
 }
 
 #contact .contact-title {
-    margin: 0px;
-    padding: 0px;
-    font-size: 40px;
-    font-weight: 400;
-    color: #84a3f8;
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #84a3f8;
 }
 
 #contact .social-icons a.button {
-    text-decoration: none;
-    padding: 0px 5px;
+  text-decoration: none;
+  padding: 0px 5px;
 } 
 
 #contact .social-icons .fa {
-    font-size: 30px;
-    display: inline-flex;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    color: #ffffff;
-    background-color: transparent;
-    border: 3px solid #84a3f8;
-    border-radius: 50%;
+  font-size: 30px;
+  display: inline-flex;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: transparent;
+  border: 3px solid #84a3f8;
+  border-radius: 50%;
 }
 
 #contact .social-icons .fa:hover {
-    background-color: #84a3f8;
+  background-color: #84a3f8;
 }
 /*End Contact CSS*/
 
 /*Start Comments Form CSS*/
 #comments {
-    background-color: #ffffff;
-    padding: 50px;
-    margin: 0px;
-    width: 100%;
-    height: auto; 
+  background-color: #ffffff;
+  padding: 50px;
+  margin: 0px;
+  width: 100%;
+  height: auto; 
 }
 
 #comments .comments-title {
-    margin: 0px;
-    padding: 0px;
-    font-size: 40px;
-    font-weight: 400;
-    color: #84a3f8;
-    text-align: center;
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #84a3f8;
+  text-align: center;
 }
 
 input, textarea {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 input[type=text], select, textarea {
@@ -318,23 +317,52 @@ input[type=submit]:hover {
 }
 
 .previous-comments-title {
-    margin: 0px;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    font-size: 30px;
-    font-weight: 300;
-    color: #84a3f8;
-    text-align: center;
+  margin: 0px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  font-size: 30px;
+  font-weight: 300;
+  color: #84a3f8;
+  text-align: center;
+}
+
+input[type=number] {
+  padding: 10px; 
+  border: 1px solid #84a3f8; 
+  resize: vertical; 
+  color: #84a3f8;
 }
 
 .comment {
-    list-style-type: none;
-    margin: 0px 0px 10px 0px;
-    padding: 10px;
-    border: 3px solid #84a3f8;
-    background-color: #ececec;
-    display: block;
-    font-size: 15px;
-    font-weight: 100;
+  list-style-type: none;
+  margin: 0px 0px 20px 0px;
+  padding: 10px;
+  border: 1.5px solid #84a3f8; 
+  background-color: #ececec;
+  display: block;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.message {
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+
+.comment button {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0px;
+  padding: 5px 10px;
+  border: 1.5px solid red;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.comment button:hover {
+  background-color: red;
+  color: #ffffff;
 }
 /*End Comments Form CSS*/
