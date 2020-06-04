@@ -12,17 +12,77 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** Fetches a comment count from the server.
+function getCommentCount() {
+  console.log('Fetching comment count.');
+  fetch('/data-limit').then(response => response.text()).then((commentCount) => {
+    console.log('Number of comments to load: ' + commentCount);
+  });
+  const commentsElement = document.getElementById('comments-container');
+  for (i = 0; i <  commentCount; i++) {
+      
+  }
+}
+*/
+
 /**
- * Adds a random greeting to the page.
+ * Fetches a form submission/comment from the server and adds it to DOM
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function getFormResponse() {
+  console.log('Fetching responses to form.');
+  const responsePromise = fetch('/data');
+  responsePromise.then(handleResponse);
+}
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+/**
+ * Handles response by converting it to text and passing the result to
+ * addQuoteToDom().
+ */
+function handleResponse(response) {
+  console.log('Handling the response.');
+  const textPromise = response.text();
+  textPromise.then(addResponseToDom);
+}
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+/** Adds form submission/comment to the DOM. */
+function addResponseToDom(comments) {
+  console.log('Adding message to dom: ' + comments);
+  const commentsElement = document.getElementById('comments-container');
+  const commentsObj = JSON.parse(comments);
+  commentsObj.forEach((comment) => {
+      commentsElement.appendChild(createCommentElement(comment));
+  });
+}
+
+/** Creates an <li> element containing form submission/comment. */
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const titleElement = document.createElement('div');
+  titleElement.className = 'commentTitle';
+  titleElement.innerText = 'Comment Posted By: ' + comment.fname + ' ' + comment.lname;
+  
+  const messageElement = document.createElement('div');
+  messageElement.className = 'message';
+  messageElement.innerText = comment.message;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete Comment';
+  deleteButtonElement.addEventListener('click', () => {
+      deleteComment(comment);
+      commentElement.remove();
+  });
+  
+  commentElement.appendChild(titleElement);
+  commentElement.appendChild(messageElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
+}
+
+/** Tells the server to delete the comment. */
+function deleteComment(comment) {
+    const params = new URLSearchParams();
+    params.append('id', comment.id);
+    fetch('/delete-comment', {method: 'POST', body:params});
 }

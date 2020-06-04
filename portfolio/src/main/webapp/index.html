@@ -2,17 +2,85 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhiannan Wackes</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    <!-- Top Navbar -->
+    <div id="topnav">
+      <div class="links-center">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="comments.html">Comments</a>
+      </div>
+    </div>
+    <!-- Home -->
+    <div id="home-bg-img"></div>
+    <div id="home">
+      <h1 class="name">Rhiannan Wackes</h1>
+      <h3 class="subtitle">Student & Programmer</h3>
+      <p class="description">I am a full-stack developer focused on designing and building applications.</p>
+      <a class="resumedownload" href="/assets/Wackes_Rhiannan.pdf" type="button" target="_blank">Download Resume</a>
+    </div>
+    <!-- About Me -->
+    <div id="about">
+      <h3 class="about-title">About Me</h3>
+      <p class="about-me">Hello! I'm Rhiannan, a third year Computer Science major at the Georgia Institute
+          of Technology. I am pursuing a concentration in Artificial Intelligence and People. I have 
+          mostly back-end development experience, but will be working with front-end and back-end this year
+          to become a well-rounded full-stack developer. This is my first time building a website from 
+          scratch and I know I have a lot to learn, but I look forward to learning!<br>I was first introduced
+          to computer science in high school when I took Intro to Programming and AP Computer Science my final 
+          years, where I found an interest in computer programming. Throughout my college experience, I have 
+          become increasingly more passionate about touching the lives of others through software.<br>
+          I would describe myself as intellectually curious and always seeking new heights. I enjoy 
+          creating and contributing to things and solving problems. I was born in Puerto Rico and lived there 
+          for thirteen years until I moved to Maryland, where I currently reside. Some of my hobbies include 
+          painting, listening to music, and playing video games. It is a dream of mine to be able to build my 
+          own PC gaming system by the end of this year to be able to enjoy playing video games some more.<br>
+      </p>
+      <img class="profile-img" src="/images/Profile.jpeg" alt="Picture of Rhiannan Wackes.">
+    </div>
+    <!-- Projects -->
+    <div id="projects">
+      <h3 class="projects-title">Projects</h3>
+      <p class="projects-subtitle">Check out some of my recent work.</p>
+      <div class="grid-container">
+        <div class="grid-item">
+          <h5 class="project-title">STEP Portfolio Website</h5>
+          <p class="project-description">A portfolio website that depicts my background, my recent work, 
+              and my newly learned web development skills.
+          </p>
+          <a class="github-link" href="https://www.github.com/rwackes/step-portfolio" type="button" target="_blank">View on Github</a>
+        </div>
+        <div class="grid-item">
+          <h5 class="project-title">Converge's Social Media Mistake Eraser</h5>
+          <p class="project-description">A website for a paid subscription service that monitors high-profile 
+              Twitter accounts for likely inappropriate or offensive tweets that may lead to the user being 
+              "cancelled" or creating an unsafe space.<br>Not yet implemented.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Contact -->
+    <div id="contact">
+      <h3 class="contact-title">Contact Me</h3>
+      <div class="social-icons">
+        <a class="button" href="https://github.com/rwackes" target="_blank">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="button" href="https://www.linkedin.com/in/rhiannanwackes" target="_blank">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a class="button" href="mailto:wackesrhiannan@gmail.com" target="_blank">
+          <i class="fa fa-envelope"></i>
+        </a>
+      </div>
     </div>
   </body>
 </html>
