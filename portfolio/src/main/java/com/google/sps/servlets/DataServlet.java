@@ -14,6 +14,14 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.FormSubmissions;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -28,18 +36,31 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
-  private FormSubmissions messages = new FormSubmissions();
-  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("FormSubmissions").addSort("timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    List<FormSubmissions> comments = new ArrayList<>();
+    for (Entity entity: results.asIterable()) {
+      long id = entity.getKey().getId();
+      String fname = (String) entity.getProperty("fname");
+      String lname = (String) entity.getProperty("lname");
+      String email = (String) entity.getProperty("emailaddress");
+      String number = (String) entity.getProperty("phonenumber");
+      long timestamp = (long) entity.getProperty("timestamp");
+      String message = (String) entity.getProperty("message");
+      FormSubmissions comment = new FormSubmissions(id, fname, lname, email, number, timestamp, message);
+      comments.add(comment);
+    }
     response.setContentType("application/json");
-    String messagesJson = convertToJsonUsingGson(messages);
-    response.getWriter().println(messagesJson);
+    String commentsJSON = convertToJsonUsingGson(comments);
+    response.getWriter().println(commentsJSON);
   }
 
-  private String convertToJsonUsingGson(FormSubmissions messages) {
+  private String convertToJsonUsingGson(List<FormSubmissions> comments) {
     Gson gson = new Gson();
-    String json = gson.toJson(messages);
+    String json = gson.toJson(comments);
     return json;
   }
 
@@ -53,10 +74,21 @@ public class DataServlet extends HttpServlet {
     String email = getParameter(request, "emailaddress", "");
     //Get the contact number input from the form.
     String number = getParameter(request, "phonenumber", "");
+    //Get timestamp of when form was submitted.
+    long timestamp = System.currentTimeMillis();
     //Get the message input from the form.
     String message = getParameter(request, "message", "");
+
+    Entity formSubmissionEntity = new Entity("FormSubmissions");
+    formSubmissionEntity.setProperty("fname", fname);
+    formSubmissionEntity.setProperty("lname", lname);
+    formSubmissionEntity.setProperty("emailaddress", email);
+    formSubmissionEntity.setProperty("phonenumber", number);
+    formSubmissionEntity.setProperty("timestamp", timestamp);
+    formSubmissionEntity.setProperty("message", message);
     
-    messages.takeSubmission(fname, lname, email, number, message);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(formSubmissionEntity);
 
     // Respond with redirecting user to Comments page.
     response.sendRedirect("/comments.html");
@@ -74,3 +106,19 @@ public class DataServlet extends HttpServlet {
     return value;
   }
 }
+
+
+/** Servlet responsible for deleting form submission/comments.
+@WebServlet("/delete-comment")
+public class DeleteCommentServlet extends HttpServlet {
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    long id = Long.parseLong(request.getParameter("id"));
+    Key formSubmissionEntityKey = KeyFactory.createKey("FormSubmissions", id);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.delete(formSubmissionEntityKey);
+  }
+}
+*/
+

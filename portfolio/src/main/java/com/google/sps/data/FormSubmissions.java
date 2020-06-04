@@ -1,15 +1,23 @@
 package com.google.sps.data;
 
-import java.util.ArrayList;
-import java.util.List;
+/** A form submission/comment. */
+public final class FormSubmissions {
 
-public class FormSubmissions {
+  private final long id;
+  private final String fname;
+  private final String lname;
+  private final String emailaddress;
+  private final String phonenumber;
+  private final long timestamp;
+  private final String message;
 
-  //List of form submissions.
-  private final List<String> history = new ArrayList<>();
-  
-  //Log a user's form submission.
-  public void takeSubmission(String fname, String lname, String email, String number, String message) {
-      history.add("New form submission by " + fname + " " + lname + ". Email: " + email + ". Phone number: " + number + ". Message reads: " + message);
+  public FormSubmissions(long id, String fname, String lname, String emailaddress, String phonenumber, long timestamp, String message) {
+      this.id = id;
+      this.fname = fname;
+      this.lname = lname;
+      this.emailaddress = emailaddress;
+      this.phonenumber = phonenumber;
+      this.timestamp = timestamp;
+      this.message = message;
   }
 }
