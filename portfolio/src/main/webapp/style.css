@@ -296,7 +296,7 @@ input[type=text], select, textarea {
   color: #84a3f8;
 }
 
-input[type=submit] {
+#submit {
   background-color: transparent;
   color: #000000;
   margin: 0px;
@@ -311,7 +311,7 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+#submit:hover {
   background-color: #84a3f8;
   color: #ffffff;
 }
@@ -319,18 +319,46 @@ input[type=submit]:hover {
 .previous-comments-title {
   margin: 0px;
   padding-top: 50px;
-  padding-bottom: 20px;
   font-size: 30px;
   font-weight: 300;
   color: #84a3f8;
   text-align: center;
 }
 
+#comment-limit-center {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
 input[type=number] {
-  padding: 10px; 
+  margin: 5px;
+  padding: 5px 10px; 
   border: 1px solid #84a3f8; 
   resize: vertical; 
+  font-size: 20px;
   color: #84a3f8;
+  text-align: center;
+}
+
+#load {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #000000;
+  border: 1.5px solid #84a3f8;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 100;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#load:hover {
+  background-color: #84a3f8;
+  color: #ffffff;
 }
 
 .comment {
@@ -344,6 +372,9 @@ input[type=number] {
   font-weight: 100;
 }
 
+.date {
+    font-size: 12px;
+}
 .message {
   font-size: 15px;
   padding-bottom: 20px;
@@ -355,14 +386,14 @@ input[type=number] {
   color: #000000;
   margin: 0px;
   padding: 5px 10px;
-  border: 1.5px solid red;
+  border: 1.5px solid #ff2727;
   border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
 }
 
 .comment button:hover {
-  background-color: red;
+  background-color: #ff2727;
   color: #ffffff;
 }
 /*End Comments Form CSS*/

@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.sps.data.FormSubmissions;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse; 
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
@@ -39,22 +40,23 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("FormSubmissions").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
-    /**
-    int commentCount = getCommentCount(request);
-    if (commentCount == -1) {
-        response.setContentType("text/html");
-        response.getWriter().println("Please enter an integer for the number of comments you wish to be loaded.");
+    
+    int commentCount = results.countEntities(FetchOptions.Builder.withDefaults());
+    String commentLimit = request.getParameter("count");
+    if (commentLimit != null && commentLimit.length() > 0) {
+      try {
+        commentCount = Integer.parseInt(commentLimit);
+      } catch (NumberFormatException e) {
+        System.err.println("Could not convert to int: " + commentLimit);
+        return;
+      }
     }
-    */
-
+    
     List<FormSubmissions> comments = new ArrayList<>();
-    for (Entity entity: results.asIterable()) {
-      /**  
+    for (Entity entity: results.asIterable()) {  
       if (commentCount == 0) {
-          return;
+          break;
       }  
-      */
       long id = entity.getKey().getId();
       String fname = (String) entity.getProperty("fname");
       String lname = (String) entity.getProperty("lname");
@@ -63,9 +65,11 @@ public class DataServlet extends HttpServlet {
       long timestamp = (long) entity.getProperty("timestamp");
       String message = (String) entity.getProperty("message");
       FormSubmissions comment = new FormSubmissions(id, fname, lname, email, number, timestamp, message);
+
       comments.add(comment);
-      //commentCount -= 1;
+      commentCount -= 1;
     }
+
     response.setContentType("application/json");
     String commentsJSON = convertToJsonUsingGson(comments);
     response.getWriter().println(commentsJSON);
@@ -76,24 +80,6 @@ public class DataServlet extends HttpServlet {
     String json = gson.toJson(comments);
     return json;
   }
-  
-  /**
-  private int getCommentCount(HttpServletRequest request) {
-    int commentCount;
-    String commentLimit = request.getParameter("count");
-    try {
-      commentCount = Integer.parseInt(commentLimit);
-    } catch (NumberFormatException e) {
-      System.err.println("Could not convert to int: " + commentLimit);
-      return -1;
-    }
-    if (commentCount < 0) {
-      System.err.println("Comment limit is out of range: " + commentLimit);
-      return -1;
-    }
-    return commentCount;
-  }
-  */
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
