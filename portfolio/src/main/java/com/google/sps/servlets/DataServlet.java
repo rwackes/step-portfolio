@@ -95,7 +95,7 @@ public class DataServlet extends HttpServlet {
     long timestamp = System.currentTimeMillis();
     // Get the message input from the form.
     String message = getParameter(request, "message", "");
-
+    
     Entity formSubmissionEntity = new Entity("FormSubmissions");
     formSubmissionEntity.setProperty("fname", fname);
     formSubmissionEntity.setProperty("lname", lname);

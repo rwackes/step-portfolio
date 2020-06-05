@@ -14,7 +14,7 @@
 
 
 /**
- * Fetches a form submission/comment from the server and adds it to DOM
+ * Fetches a form submission/comment from the server and adds it to DOM.
  */
 function getFormResponse() {
   const commentsMaxElement = document.getElementById('count').value;
@@ -31,7 +31,7 @@ function getFormResponse() {
 }
 
 /** 
- * Creates an <li> element containing form submission/comment.
+ * Creates an <li> element containing a form submission/comment.
  */
 function createCommentElement(comment) {
   const commentElement = document.createElement('li');
@@ -69,4 +69,16 @@ function deleteComment(comment) {
     const params = new URLSearchParams();
     params.append('id', comment.id);
     fetch('/delete-comment', {method: 'POST', body:params});
+}
+
+/** Tells the server to fetch and delete all comments. */
+function deleteAllComments() {
+    fetch('/data').then(response => response.text()).then((comments) => {
+      const commentsElement = document.getElementById('comments-container');
+      const commentsObj = JSON.parse(comments);
+      commentsObj.forEach((comment) => {
+        deleteComment(comment);
+      })
+      commentsElement.innerText = '';
+    });
 }

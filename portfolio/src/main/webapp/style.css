@@ -16,8 +16,8 @@ body {
 }
 
 button {
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
 }
 
 /*Start Navbar CSS*/
@@ -324,16 +324,40 @@ input[type=text], select, textarea {
 .previous-comments-title {
   margin: 0px;
   padding-top: 50px;
+  padding-bottom: 5px;
   font-size: 30px;
   font-weight: 300;
   color: #84a3f8;
   text-align: center;
 }
 
+#delete-comment-center {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+#delete {
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0px;
+  padding: 5px 10px;
+  border: 1.5px solid #ff2727;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+}
+
+#delete:hover {
+  background-color: #ff2727;
+  color: #ffffff;
+}
+
 #comment-limit-center {
-    margin: 0px;
-    padding: 0px;
-    text-align: center;
+  margin: 0px;
+  padding: 10px;
+  text-align: center;
 }
 
 input[type=number] {
@@ -378,8 +402,9 @@ input[type=number] {
 }
 
 .date {
-    font-size: 12px;
+  font-size: 12px;
 }
+
 .message {
   font-size: 15px;
   padding-bottom: 20px;
