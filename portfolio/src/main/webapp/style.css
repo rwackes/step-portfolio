@@ -178,8 +178,8 @@ button {
 .grid-container {
   padding-top: 20px;
   display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 100px 50px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 50px;
   justify-content: center;
   align-content: center;
 }
