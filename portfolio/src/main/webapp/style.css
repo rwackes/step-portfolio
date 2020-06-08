@@ -291,7 +291,7 @@ input, textarea {
   font-family: 'Montserrat', sans-serif;
 }
 
-input[type=text], select, textarea {
+input[type=text], input[type=email], select, textarea {
   width: 100%; 
   padding: 10px; 
   border: 1px solid #84a3f8; 
@@ -299,6 +299,16 @@ input[type=text], select, textarea {
   margin-bottom: 20px;
   resize: vertical; 
   color: #84a3f8;
+}
+
+input:invalid:required, textarea:invalid:required {
+  border: 1px solid #ff2727;
+  box-shadow: 0px 0px 5px #ff2727;
+}
+
+input:invalid:focus, textarea:invalid:focus {
+  border: 1px solid #84a3f8;
+  box-shadow: none;
 }
 
 #submit {
