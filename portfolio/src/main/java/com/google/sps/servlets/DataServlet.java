@@ -14,15 +14,15 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.appengine.api.datastore.FetchOptions;
-import com.google.sps.data.FormSubmissions;
 import com.google.gson.Gson;
+import com.google.sps.data.FormSubmissions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class DataServlet extends HttpServlet {
     
     List<FormSubmissions> comments = new ArrayList<>();
     for (Entity entity: results.asIterable()) {  
-      if (commentCount == 0) {
+      if (comments.size() == commentCount) {
           break;
       }  
       long id = entity.getKey().getId();
@@ -67,7 +67,6 @@ public class DataServlet extends HttpServlet {
       FormSubmissions comment = new FormSubmissions(id, fname, lname, email, number, timestamp, message);
 
       comments.add(comment);
-      commentCount -= 1;
     }
 
     response.setContentType("application/json");
@@ -75,6 +74,9 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(commentsJSON);
   }
 
+  /** 
+   * Converts List of comments to JSON string using GSON library.
+   */
   private String convertToJsonUsingGson(List<FormSubmissions> comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
@@ -96,6 +98,7 @@ public class DataServlet extends HttpServlet {
     // Get the message input from the form.
     String message = getParameter(request, "message", "");
     
+    // Create an entity of FormSubmissions with corresponding data set as properties of the entity.
     Entity formSubmissionEntity = new Entity("FormSubmissions");
     formSubmissionEntity.setProperty("fname", fname);
     formSubmissionEntity.setProperty("lname", lname);
@@ -104,6 +107,7 @@ public class DataServlet extends HttpServlet {
     formSubmissionEntity.setProperty("timestamp", timestamp);
     formSubmissionEntity.setProperty("message", message);
     
+    // Store the Form Submissions entity in Datastore.
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(formSubmissionEntity);
 

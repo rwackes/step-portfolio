@@ -31,29 +31,32 @@ function getFormResponse() {
 }
 
 /** 
- * Creates an <li> element containing a form submission/comment.
+ * Creates an <li> element to be displayed client-side that contains data
+ * fetched from a form submission/comment stored in the server passed through getFormResponse().
+ * @param server_comment: a FormSubmissions instance stored in server
+ * @return commentElement: an <li> element with data of a FormSubmissions instance
  */
-function createCommentElement(comment) {
+function createCommentElement(server_comment) {
   const commentElement = document.createElement('li');
   commentElement.className = 'comment';
 
   const titleElement = document.createElement('div');
   titleElement.className = 'commentTitle';
-  titleElement.innerText = 'Comment Posted By: ' + comment.fname + ' ' + comment.lname;
+  titleElement.innerText = 'Comment Posted By: ' + server_comment.fname + ' ' + server_comment.lname;
   
   const dateElement = document.createElement('div');
   dateElement.className = 'date';
-  const date = new Date(comment.timestamp);
+  const date = new Date(server_comment.timestamp);
   dateElement.innerText = 'Posted on ' + date.toLocaleString();
 
   const messageElement = document.createElement('div');
   messageElement.className = 'message';
-  messageElement.innerText = comment.message;
+  messageElement.innerText = server_comment.message;
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete Comment';
   deleteButtonElement.addEventListener('click', () => {
-      deleteComment(comment);
+      deleteComment(server_comment);
       commentElement.remove();
   });
   
@@ -64,7 +67,10 @@ function createCommentElement(comment) {
   return commentElement;
 }
 
-/** Tells the server to delete the comment. */
+/** 
+ * Tells the server to delete the comment. 
+ * @param comment: a FormSubmissions instance stored in the server
+ */
 function deleteComment(comment) {
     const params = new URLSearchParams();
     params.append('id', comment.id);
