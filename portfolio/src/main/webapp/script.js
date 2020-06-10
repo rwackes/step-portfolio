@@ -12,11 +12,48 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** 
+ * Checks if user is logged in. Only logged in users can view previous comments or post new comments.
+ */
+function authenticate() {
+  fetch('/authenticate').then(response => response.json()).then((authenticationStatus) => {
+    console.log(authenticationStatus);
+    if (authenticationStatus) {
+      console.log('User is logged in. Display comments.');
+      document.getElementById('comments').style.visibility = 'visible';
+    } else {
+      console.log('User is not logged in. Comments disabled.');
+      window.location.href = 'login.html';
+    }
+  });
+}
 
+/**
+ * Function that directs user to Users API login page.
+ */
+function goToLogin()  {
+  fetch('/user-login').then(response => response.text()).then((loginUrl) => {
+    console.log(loginUrl);
+    console.log('Redirecting to login.');
+    window.location.href = loginUrl;
+  })
+}
+
+/**
+ * Function that directs user to Users API logout page.
+ */
+function goToLogout() {
+  fetch('/user-login').then(response => response.text()).then((logoutUrl) => {
+    console.log(logoutUrl);
+    console.log('Logging user out.');
+    window.location.href = logoutUrl;
+  });
+}
 /**
  * Fetches a form submission/comment from the server and adds it to DOM.
  */
 function getFormResponse() {
+  authenticate();
   const commentsMaxElement = document.getElementById('count').value;
   console.log('Number of comments to be displayed: ' + commentsMaxElement);
   console.log('Fetching responses to form.');
@@ -43,6 +80,10 @@ function createCommentElement(server_comment) {
   const titleElement = document.createElement('div');
   titleElement.className = 'commentTitle';
   titleElement.innerText = 'Comment Posted By: ' + server_comment.fname + ' ' + server_comment.lname;
+
+  const emailElement = document.createElement('div');
+  emailElement.className = 'userEmail';
+  emailElement.innerText = server_comment.emailaddress; 
   
   const dateElement = document.createElement('div');
   dateElement.className = 'date';
@@ -61,6 +102,7 @@ function createCommentElement(server_comment) {
   });
   
   commentElement.appendChild(titleElement);
+  commentElement.appendChild(emailElement);
   commentElement.appendChild(dateElement);
   commentElement.appendChild(messageElement);
   commentElement.appendChild(deleteButtonElement);
