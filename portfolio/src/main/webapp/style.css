@@ -100,7 +100,7 @@ button {
   background-color: transparent;
   border: 3px solid #84a3f8;
   border-radius: 20px;
-  color: #f2f2f2;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 200;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
@@ -117,7 +117,8 @@ button {
 /*Start About Me CSS*/
 #about {
   margin: 0px;
-  padding: 50px;
+  padding: 80px 50px;
+  padding-top: 80px;
   width: 100%;
   height: auto; 
   text-align: center;
@@ -152,7 +153,7 @@ button {
 /*Start Projects CSS*/
 #projects {
   margin: 0px;
-  padding: 50px;
+  padding: 80px 50px;
   width: 100%;
   height: auto; 
   text-align: center;
@@ -232,7 +233,7 @@ button {
 /*Start Contact CSS*/
 #contact {
   margin: 0px;
-  padding: 50px;
+  padding: 80px 50px;
   width: 100%;
   height: auto; 
   text-align: center;
@@ -272,15 +273,40 @@ button {
 /*Start Comments Form CSS*/
 #comments {
   background-color: #ffffff;
-  padding: 50px;
   margin: 0px;
+  padding: 80px 50px;
   width: 100%;
   height: auto; 
+  visibility: hidden;
+}
+
+#redirect-logout {
+  position: relative;
+}
+
+#redirect-logout-button {
+  position: absolute;
+  top: 0px;
+  right: 0px; 
+  background-color: transparent;
+  color: #000000;
+  padding: 10px 20px;
+  border: 1.5px solid #84a3f8;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 100;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#redirect-logout-button:hover {
+  background-color: #84a3f8;
+  color: #ffffff;
 }
 
 #comments .comments-title {
-  margin: 0px;
-  padding: 0px;
   font-size: 40px;
   font-weight: 400;
   color: #84a3f8;
@@ -291,7 +317,7 @@ input, textarea {
   font-family: 'Montserrat', sans-serif;
 }
 
-input[type=text], input[type=email], select, textarea {
+input[type=text], select, textarea {
   width: 100%; 
   padding: 10px; 
   border: 1px solid #84a3f8; 
@@ -411,7 +437,7 @@ input[type=number] {
   font-weight: 100;
 }
 
-.date {
+.userEmail, .date {
   font-size: 12px;
 }
 
@@ -437,3 +463,66 @@ input[type=number] {
   color: #ffffff;
 }
 /*End Comments Form CSS*/
+
+/*Start Login CSS*/
+#login {
+  background-color: #b7c8f8;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  filter: 2px;
+  -webkit-filter: blur(2px);
+}
+
+#login-box {
+  margin: auto;
+  padding: 20px;
+  width: 50%;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  align-content: center;
+  background-color: #ffffff;
+  border: 3px solid #84a3f8;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+  z-index: 10;
+}
+
+.login-title {
+  margin: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #84a3f8;
+  text-align: center;
+}
+
+.login-subtitle {
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #000000;
+}
+
+.redirect-login {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 3px solid #84a3f8;
+  border-radius: 20px;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 200;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
+  text-align: center;
+  text-decoration: none;
+}
+
+.redirect-login-button:hover {
+  background-color: #84a3f8;
+  color: #ffffff;
+}
+/*End Login CSS*/
