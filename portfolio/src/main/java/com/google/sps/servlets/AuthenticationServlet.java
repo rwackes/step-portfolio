@@ -38,11 +38,11 @@ public class AuthenticationServlet extends HttpServlet {
     // Check user login status.
     if (!userService.isUserLoggedIn()) {
       // User is not logged in so direct user to login URL.
-      //Return false to JS to disable comments and form.
+      // Return false to JS to disable comments and form.
       response.getWriter().println("false");
     } else {
       // User is logged in, so request can proceed.
-      //Return true to JS to make comments and form visible.
+      // Return true to JS to make comments and form visible.
       response.getWriter().println("true");
     }
   }
