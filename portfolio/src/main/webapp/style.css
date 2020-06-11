@@ -2,17 +2,14 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
   font-family: 'Montserrat', sans-serif;
+  margin: 0px;
+  padding: 0px;
   height: 100%;
   line-height: 1.5;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0px;
-  height: 100%;
 }
 
 button {
@@ -118,7 +115,6 @@ button {
 #about {
   margin: 0px;
   padding: 80px 50px;
-  padding-top: 80px;
   width: 100%;
   height: auto; 
   text-align: center;
@@ -149,6 +145,37 @@ button {
   padding-top: 10px;
 }
 /*End About Me CSS*/
+
+/*Start Maps CSS*/
+#map-api {
+  margin: 0px;
+  padding: 80px 50px;
+  height: auto; 
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.map-title {
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: 400;
+  color: #84a3f8;
+}
+
+#map {
+  height: 600px;
+  width: auto;
+  border: 1.5px solid #84a3f8;
+}
+
+.infowindow-title {
+  padding: 0px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #000000;
+}
+/*End Maps CSS*/
 
 /*Start Projects CSS*/
 #projects {
