@@ -97,8 +97,8 @@ function createCommentElement(server_comment) {
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete Comment';
   deleteButtonElement.addEventListener('click', () => {
-      deleteComment(server_comment);
-      commentElement.remove();
+    deleteComment(server_comment);
+    commentElement.remove();
   });
   
   commentElement.appendChild(titleElement);
@@ -114,19 +114,155 @@ function createCommentElement(server_comment) {
  * @param comment: a FormSubmissions instance stored in the server
  */
 function deleteComment(comment) {
-    const params = new URLSearchParams();
-    params.append('id', comment.id);
-    fetch('/delete-comment', {method: 'POST', body:params});
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-comment', {method: 'POST', body:params});
 }
 
 /** Tells the server to fetch and delete all comments. */
 function deleteAllComments() {
-    fetch('/data').then(response => response.text()).then((comments) => {
-      const commentsElement = document.getElementById('comments-container');
-      const commentsObj = JSON.parse(comments);
-      commentsObj.forEach((comment) => {
-        deleteComment(comment);
-      })
-      commentsElement.innerText = '';
-    });
+  fetch('/data').then(response => response.text()).then((comments) => {
+    const commentsElement = document.getElementById('comments-container');
+    const commentsObj = JSON.parse(comments);
+    commentsObj.forEach((comment) => {
+      deleteComment(comment);
+    })
+    commentsElement.innerText = '';
+  });
 }
+
+/**
+ * Creates a map and adds it to the page.
+ */
+var purpleStyledMap;
+var map;
+var marker;
+function initMap() {
+  // Create a new StyledMapType object, passing it an array of desaturated purple
+  // styles, and the name to be displayed on the map type control. 
+  purpleStyledMap = new google.maps.StyledMapType(
+    [
+      {
+        featureType: 'landscape',
+        stylers: [
+          {
+            "hue": "#84a3f8"
+          },
+          {
+            "saturation": -10
+          }
+        ]
+      },
+      {
+        featureType: 'poi',
+        stylers: [
+          {
+            "hue": "#84a3f8"
+          },
+          {
+            "saturation": -50
+          },
+          {
+            "lightness": -45
+          },
+          {
+            "visibility": "off"
+          }
+        ] 
+      },
+      {
+        featureType: 'road',
+        stylers: [
+          {
+            "hue": "#84a3f8"
+          },
+          {
+            "saturation": -30
+          }
+        ]
+      },
+      {
+        featureType: 'road.local',
+        stylers: [
+          {
+            "lightness": 20
+          }
+        ]
+      },
+      {
+        featureType: 'transit',
+        stylers: [
+          {
+            "hue": "#84a3f8"
+          },
+          {
+            "saturation": -15
+          },
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
+      {
+        featureType: 'transit.line',
+        stylers: [
+          {
+            "saturation": -70
+          }
+        ]
+      },
+      {
+        featureType: 'water',
+        stylers: [
+          {
+            "hue": "#b7c8f8"
+          },
+          {
+            "saturation": -20
+          },
+          {
+            "lightness": 10
+          }
+        ]
+      }
+    ],
+    {
+      name: 'Purple Map'
+    }
+  );
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 33.9955566, lng: -118.4768693},
+    zoom: 10,
+    mapTypeControlOptions: {
+     mapTypeIds: ['roadmap', 'satellite', 'terrain', 'styled_map']
+    }
+  });
+
+  // Create a marker.
+  marker = new google.maps.Marker({
+    position: {lat: 33.776260, lng: -84.392390},
+    icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+    map: map,
+    title: "Where I'm working remotely"
+  });
+
+  // Create an info window
+  const infoW = new google.maps.InfoWindow({
+    content: '<h3 class="infowindow-title">Lambda Chi</h3>' + 
+    'This is a former fraternity house that was kicked off campus two years ago and has become an on-campus private dorm-style residence for female students for the next four years. Rest in Peace Lambda Chi.',
+    maxWidth: 200
+  });
+
+  // Add info window to marker that shows info window when marker is clicked on.
+  marker.addListener('click', () => {
+    infoW.open(map, marker);
+  });
+
+  // Associate the purple styled map with the MapTypeId and set it to display.
+  map.mapTypes.set('styled_map', purpleStyledMap);
+  map.setMapTypeId('styled_map');
+}
+
+// DOM listener to load map.
+google.maps.event.addDomListener(window, 'load', initMap);
