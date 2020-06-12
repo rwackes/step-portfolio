@@ -170,10 +170,11 @@ button {
 }
 
 .infowindow-title {
+  margin: 0px;
   padding: 0px;
   font-size: 20px;
-  font-weight: 400;
-  color: #000000;
+  font-weight: 600;
+  color:#84a3f8;
 }
 /*End Maps CSS*/
 
