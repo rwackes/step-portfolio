@@ -49,6 +49,7 @@ function goToLogout() {
     window.location.href = logoutUrl;
   });
 }
+
 /**
  * Fetches a form submission/comment from the server and adds it to DOM.
  */
@@ -119,7 +120,9 @@ function deleteComment(comment) {
   fetch('/delete-comment', {method: 'POST', body:params});
 }
 
-/** Tells the server to fetch and delete all comments. */
+/** 
+ * Tells the server to fetch and delete all comments. 
+ */
 function deleteAllComments() {
   fetch('/data').then(response => response.text()).then((comments) => {
     const commentsElement = document.getElementById('comments-container');
@@ -131,15 +134,191 @@ function deleteAllComments() {
   });
 }
 
+// Initialize variables.
+var map;
+// Create default lat and lng variables for lat, lng points of Google LAX office.
+var defaultLat= 33.9955566;
+var defaultLng = -118.4768693;
+// Create editable marker that displays when user clicks in the map.
+var userMarker;
+
 /**
  * Creates a map and adds it to the page.
  */
-var purpleStyledMap;
-var map;
-var marker;
 function initMap() {
-  // Create a new StyledMapType object, passing it an array of desaturated purple
-  // styles, and the name to be displayed on the map type control. 
+
+  // Call function to create purple styled map.
+  createStyledMap();
+  
+  // Create map.
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: defaultLat, lng: defaultLng},
+    zoom: 10,
+    mapTypeControlOptions: {
+     mapTypeIds: ['roadmap', 'satellite', 'terrain', 'styled_map']
+    }
+  });
+
+  // Allow users to add markers of their own by clicking on map to show a marker a with text box the user can edit. 
+  map.addListener('click', (event) => {
+    createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
+  });
+
+  // Call function that fetches data of locations I have visited to add to map.
+  fetchMyMarkers();
+  // Call function that fetches data of locations users have visited to add to map.
+  fetchUserMarkers();
+
+  // Associate the purple styled map with the MapTypeId and set it to display.
+  map.mapTypes.set('styled_map', purpleStyledMap);
+  map.setMapTypeId('styled_map');
+}
+
+/**
+ * Fetches the data representing locations I have visited from the server.
+ */
+function fetchMyMarkers() {
+  fetch('/my-markers').then(response => response.json()).then((markers) => {
+    markers.forEach((marker) => {
+      createMyMarkers(marker.lat, marker.lng, marker.title, marker.content)
+    });
+  });
+}
+
+function fetchUserMarkers() {
+  fetch('/user-markers').then(response => response.json()).then((markers) => {
+    markers.forEach((marker) => {
+      createUserMarkers(marker.lat, marker.lng, marker.title, marker.content)
+    });
+  });
+}
+
+/** 
+ * Create a marker from the data fetched to be displayed on map with a read-only info window when clicked.
+ * @param lat: the latitude point of the location
+ * @param lng: the longitude point of the location
+ * @param title: the name of the marker and the title for the info window attached to the marker
+ * @param content: a description of the location for the info window attached to the marker
+ */
+function createMyMarkers(lat, lng, title, content) {
+  // Create a marker with data on a place I have visited.
+  const marker = new google.maps.Marker({
+    position: {lat: lat, lng: lng},
+    icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+    map: map,
+    title: title
+  });
+
+  // Create a read-only info window (text box that displays title and content description of location).
+  const infoWindow = new google.maps.InfoWindow({
+    content: '<p class="infowindow-title">' + title + '</p>' + content,
+    maxWidth: 400
+  });
+
+  // Add info window to marker that shows when marker is clicked on.
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+  });
+}
+
+/** 
+ * Create a marker from user inputted data to be displayed on map with a read-only info window when clicked.
+ * @param lat: the latitude point of the location
+ * @param lng: the longitude point of the location
+ * @param title: the name of the marker and the title for the info window attached to the marker
+ * @param content: a description of the location for the info window attached to the marker
+ */
+function createUserMarkers(lat, lng, title, content) {
+  // Create a marker with data on a place a user has visited.
+  const marker = new google.maps.Marker({
+    position: {lat: lat, lng: lng}, 
+    icon: 'https://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+    map: map
+  });
+
+  // Create a read-only info window (text box that displays title and content description of location).
+  const infoWindow = new google.maps.InfoWindow({
+    content: '<p class="infowindow-title">' + title + '</p>' + content,
+    maxWidth: 400
+  });
+
+  // Add info window to marker that shows when marker is clicked on.
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+  });  
+}
+
+/**
+ * Creates a marker that shows a textbox the user can edit.
+ */
+function createMarkerForEdit(lat, lng) {
+  // If we are already showing an editable marker, then remove editable marker.
+  if (userMarker) {
+    userMarker.setMap(null);
+  }
+
+  userMarker = new google.maps.Marker({
+    position: {lat: lat, lng: lng},
+    icon: 'https://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+    map: map
+  });
+
+  const infoWindow = new google.maps.InfoWindow({
+    content: buildInfoWindowInput(lat, lng)
+  });
+
+  // When user closes editable info window, remove the editable marker.
+  google.maps.event.addListener(infoWindow, 'closeclick', () => {
+    userMarker.setMap(null);
+  });
+
+  // Add info window to marker that shows when marker is clicked on.
+  infoWindow.open(map, userMarker);
+}
+
+/**
+ * Builds and returns HTML elements that show an editable textbok and an add button that adds marker.
+ */
+function buildInfoWindowInput(lat, lng) {
+  const titleInput = document.createElement('textarea');
+  const textBox = document.createElement('textarea');
+  const button = document.createElement('button');
+  button.appendChild(document.createTextNode('Submit'));
+
+  button.onclick = () => {
+    postMarker(lat, lng, titleInput.value, textBox.value);
+    createUserMarkers(lat, lng, titleInput.value, textBox.value);
+    userMarker.setMap(null); 
+  };
+
+  const containerDiv = document.createElement('div');
+  containerDiv.appendChild(titleInput);
+  containerDiv.appendChild(textBox);
+  containerDiv.appendChild(document.createElement('br'));
+  containerDiv.appendChild(button);
+
+  return containerDiv;
+}
+
+/**
+ * Sends user marker to backend for saving.
+ */
+function postMarker(lat, lng, title, content) {
+  const params = new URLSearchParams();
+  params.append('lat', lat);
+  params.append('lng', lng);
+  params.append('title', title);
+  params.append('content', content);
+
+  fetch('/user-markers', {method: 'POST', body: params});
+}
+
+/**
+ * Create a new StyledMapType object, passing it an array of desaturated purple
+ * styles, and the name to be displayed on the map type control. 
+ */
+var purpleStyledMap;
+function createStyledMap() {
   purpleStyledMap = new google.maps.StyledMapType(
     [
       {
@@ -230,39 +409,6 @@ function initMap() {
       name: 'Purple Map'
     }
   );
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 33.9955566, lng: -118.4768693},
-    zoom: 10,
-    mapTypeControlOptions: {
-     mapTypeIds: ['roadmap', 'satellite', 'terrain', 'styled_map']
-    }
-  });
-
-  // Create a marker.
-  marker = new google.maps.Marker({
-    position: {lat: 33.776260, lng: -84.392390},
-    icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
-    map: map,
-    title: "Where I'm working remotely"
-  });
-
-  // Create an info window
-  const infoW = new google.maps.InfoWindow({
-    content: '<h3 class="infowindow-title">Lambda Chi</h3>' + 
-    'This is a former fraternity house that was kicked off campus two years ago and has become an on-campus private dorm-style residence for female students for the next four years. Rest in Peace Lambda Chi.',
-    maxWidth: 200
-  });
-
-  // Add info window to marker that shows info window when marker is clicked on.
-  marker.addListener('click', () => {
-    infoW.open(map, marker);
-  });
-
-  // Associate the purple styled map with the MapTypeId and set it to display.
-  map.mapTypes.set('styled_map', purpleStyledMap);
-  map.setMapTypeId('styled_map');
 }
 
-// DOM listener to load map.
-google.maps.event.addDomListener(window, 'load', initMap);
+google.maps.event.addDomListener(window, 'load', initMap());
