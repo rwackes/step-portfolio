@@ -169,6 +169,7 @@ button {
   border: 1.5px solid #84a3f8;
 }
 
+
 .infowindow-title {
   margin: 0px;
   padding: 0px;
@@ -176,6 +177,34 @@ button {
   font-weight: 600;
   color:#84a3f8;
 }
+
+.title-input, .textbox-label {
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #84a3f8;
+}
+
+.marker-submit-btn {
+  background-color: transparent;
+  color: #000000;
+  margin: 0px;
+  padding: 10px 20px;
+  border: 1.5px solid #84a3f8;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 100;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
+  text-align: center;
+  text-decoration: none;
+}
+
+.marker-submit-btn:hover {
+  background-color: #84a3f8;
+  color: #ffffff;
+}
+
 /*End Maps CSS*/
 
 /*Start Projects CSS*/
