@@ -35,39 +35,11 @@ import org.jsoup.safety.Whitelist;
 @WebServlet("/user-markers")
 public class OthersMarkerServlet extends HttpServlet {
 
-  /** Responds with a JSON array containing marker data. */
+  /** Responds with a JSON array containing marker data fetched from Datastore. */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
 
-    Collection<Marker> markers = getMarkers();
-    String markersJSON = convertToJsonUsingGson(markers);
-    response.getWriter().println(markersJSON);
-  }
-  
-  /** 
-   * Converts List of markers to JSON string using GSON library.
-   */
-  private String convertToJsonUsingGson(Collection<Marker> markers) {
-    Gson gson = new Gson();
-    String json = gson.toJson(markers);
-    return json;
-  }
-
-  /** Accepts a POST request containing a new marker. */
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) {
-    double lat = Double.parseDouble(request.getParameter("lat"));
-    double lng = Double.parseDouble(request.getParameter("lng"));
-    String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
-    String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
-
-    Marker marker = new Marker(lat, lng, title, content);
-    storeMarker(marker);
-  }
-
-  /** Fetches markers from Datastore. */
-  private Collection<Marker> getMarkers() {
     Collection<Marker> markers = new ArrayList<>();
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -83,11 +55,30 @@ public class OthersMarkerServlet extends HttpServlet {
       Marker marker = new Marker(lat, lng, title, content);
       markers.add(marker);
     }
-    return markers;
+
+    String markersJSON = convertToJsonUsingGson(markers);
+    response.getWriter().println(markersJSON);
+  }
+  
+  /** 
+   * Converts List of markers to JSON string using GSON library.
+   */
+  private String convertToJsonUsingGson(Collection<Marker> markers) {
+    Gson gson = new Gson();
+    String json = gson.toJson(markers);
+    return json;
   }
 
-  /** Stores a marker in Datastore. */
-  public void storeMarker(Marker marker) {
+  /** Accepts a POST request containing a new marker. Store marker in Datastore*/
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    double lat = Double.parseDouble(request.getParameter("lat"));
+    double lng = Double.parseDouble(request.getParameter("lng"));
+    String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
+    String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
+
+    Marker marker = new Marker(lat, lng, title, content);
+    // Create entity and store marker in Datastore.
     Entity markerEntity = new Entity("Marker");
     markerEntity.setProperty("lat", marker.getLat());
     markerEntity.setProperty("lng", marker.getLng());
