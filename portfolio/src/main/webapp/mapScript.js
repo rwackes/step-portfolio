@@ -77,9 +77,9 @@ function fetchMarkers() {
  * @param lng: the longitude point of the location
  * @param title: the name of the marker and the title for the info window attached to the marker
  * @param content: a description of the location for the info window attached to the marker
- * @param boolean: represents if data is location I have visited (true) or user has visited (false)
+ * @param isMyLocation: a boolean that represents if data is for a location I have visited (true) or user has visited (false)
  */
-function createMarkers(lat, lng, title, content, boolean) {
+function createMarkers(lat, lng, title, content, isMyLocation) {
 
   // Create a marker with data.
   const marker = new google.maps.Marker({
@@ -90,7 +90,7 @@ function createMarkers(lat, lng, title, content, boolean) {
   }); 
   
   // If marker represents a user inputted location, change icon to pink.
-  if (!boolean) {
+  if (!isMyLocation) {
     marker.setIcon('https://maps.google.com/mapfiles/ms/icons/pink-dot.png')
   }
 
