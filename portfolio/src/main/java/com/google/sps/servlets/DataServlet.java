@@ -14,13 +14,15 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.google.sps.data.FormSubmissions;
 import java.io.IOException;
@@ -37,6 +39,9 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Reference to UserService.
+    UserService userService = UserServiceFactory.getUserService();
+
     Query query = new Query("FormSubmissions").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -85,12 +90,15 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Reference to UserService.
+    UserService userService = UserServiceFactory.getUserService();
+    
     // Get the first name input from the form.
     String fname = getParameter(request, "firstname", "");
     // Get the last name input from the form.
     String lname = getParameter(request, "lastname", "");
-    // Get the email address input from the form.
-    String email = getParameter(request, "emailaddress", "");
+    // Get the email address of the current signed in user.
+    String email = userService.getCurrentUser().getEmail();
     // Get the contact number input from the form.
     String number = getParameter(request, "phonenumber", "");
     // Get timestamp of when form was submitted.
