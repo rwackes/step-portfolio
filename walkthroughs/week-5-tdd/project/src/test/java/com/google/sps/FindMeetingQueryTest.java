@@ -392,7 +392,11 @@ public final class FindMeetingQueryTest {
   @Test
   public void noMandatoryAttendeesNotEnoughRoom() {
     // Have two people, each being an oprtional attendee with no gaps in their schedule.
-    
+    // 
+    // Events  : |--A--|
+    //           |----------B----------|
+    // Day     : |---------------------|
+    // Options :       
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TimeRange.START_OF_DAY, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)),
