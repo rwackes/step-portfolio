@@ -44,10 +44,22 @@ public class MyMarkerServlet extends HttpServlet {
       // Data for a new marker is represented as: lat, lng, title, content
       // Split a line by commas to get each corresponding data.
       String[] markerData = line.split(",");
-      double lat = Double.parseDouble(markerData[0]);
-      double lng = Double.parseDouble(markerData[1]);
+
+      // Validate that there are the correct number of data within the line.
+      if (markerData.length != 4) {
+        // If not properly formatted, skip the following lines of code.
+        continue;
+      }
+      Double lat = Double.parseDouble(markerData[0]);
+      Double lng = Double.parseDouble(markerData[1]);
       String title = markerData[2];
       String content = markerData[3];
+
+      // Validate the values of lat and lng for malformation.
+      if (lat == null || lng == null) {
+        // If null, skip the last line of code.
+        continue;
+      }
 
       markers.add(new Marker(lat, lng, title, content));
     }
