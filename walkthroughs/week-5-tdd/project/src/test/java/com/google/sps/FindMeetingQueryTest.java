@@ -337,7 +337,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void justEnoughRoomOptional() {
+  public void justEnoughRoomForNotOptional() {
     // Have two people, but make it so that there is just enough room at one point in the day to
     // have the meeting for the one attendee that is not optional.
     //
@@ -364,7 +364,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noMandatoryAttendees() {
+  public void optionalAttendeesOnlyJustEnoughRoom() {
     // Have two people, each being an optional attendee with several gaps in their schedule.
     // 
     // Events  : |--A--|   |--B--|
@@ -390,11 +390,11 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noMandatoryAttendeesNotEnoughRoom() {
+  public void optionalAttendeesOnlyNotEnoughRoom() {
     // Have two people, each being an oprtional attendee with no gaps in their schedule.
     // 
     // Events  : |--A--|
-    //           |----------B----------|
+    //           |-------------------|
     // Day     : |---------------------|
     // Options :       
     Collection<Event> events = Arrays.asList(
