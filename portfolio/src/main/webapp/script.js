@@ -49,6 +49,7 @@ function goToLogout() {
     window.location.href = logoutUrl;
   });
 }
+
 /**
  * Fetches a form submission/comment from the server and adds it to DOM.
  */
@@ -97,8 +98,8 @@ function createCommentElement(server_comment) {
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete Comment';
   deleteButtonElement.addEventListener('click', () => {
-      deleteComment(server_comment);
-      commentElement.remove();
+    deleteComment(server_comment);
+    commentElement.remove();
   });
   
   commentElement.appendChild(titleElement);
@@ -114,19 +115,21 @@ function createCommentElement(server_comment) {
  * @param comment: a FormSubmissions instance stored in the server
  */
 function deleteComment(comment) {
-    const params = new URLSearchParams();
-    params.append('id', comment.id);
-    fetch('/delete-comment', {method: 'POST', body:params});
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-comment', {method: 'POST', body:params});
 }
 
-/** Tells the server to fetch and delete all comments. */
+/** 
+ * Tells the server to fetch and delete all comments. 
+ */
 function deleteAllComments() {
-    fetch('/data').then(response => response.text()).then((comments) => {
-      const commentsElement = document.getElementById('comments-container');
-      const commentsObj = JSON.parse(comments);
-      commentsObj.forEach((comment) => {
-        deleteComment(comment);
-      })
-      commentsElement.innerText = '';
-    });
+  fetch('/data').then(response => response.text()).then((comments) => {
+    const commentsElement = document.getElementById('comments-container');
+    const commentsObj = JSON.parse(comments);
+    commentsObj.forEach((comment) => {
+      deleteComment(comment);
+    })
+    commentsElement.innerText = '';
+  });
 }

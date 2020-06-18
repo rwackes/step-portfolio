@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="mapScript.js"></script>
     <script src="script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCicwI4p7kk3IdjhvnNJ_AaOyIWPl1wHjg&callback=initMap" type="text/javascript"></script>
   </head>
   <body>
     <!-- Top Navbar -->
@@ -45,6 +47,11 @@
           own PC gaming system by the end of this year to be able to enjoy playing video games some more.<br>
       </p>
       <img class="profile-img" src="/images/Profile.jpeg" alt="Picture of Rhiannan Wackes.">
+    </div>
+    <!-- Google Map -->
+    <div id="map-api">
+      <h3 class="map-title">Places I've Been To</h3>
+      <div id="map"></div>
     </div>
     <!-- Projects -->
     <div id="projects">
