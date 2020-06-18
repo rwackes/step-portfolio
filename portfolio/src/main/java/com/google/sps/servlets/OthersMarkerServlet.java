@@ -77,13 +77,12 @@ public class OthersMarkerServlet extends HttpServlet {
     String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
     String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
 
-    Marker marker = new Marker(lat, lng, title, content);
     // Create entity and store marker in Datastore.
     Entity markerEntity = new Entity("Marker");
-    markerEntity.setProperty("lat", marker.getLat());
-    markerEntity.setProperty("lng", marker.getLng());
-    markerEntity.setProperty("title", marker.getTitle());
-    markerEntity.setProperty("content", marker.getContent());
+    markerEntity.setProperty("lat", lat);
+    markerEntity.setProperty("lng", lng);
+    markerEntity.setProperty("title", title);
+    markerEntity.setProperty("content", content);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(markerEntity);
